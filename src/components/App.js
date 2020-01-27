@@ -17,13 +17,15 @@ class App extends Component {
     pageNumber: 1,
     isModalOpen: false,
     imageId: '',
+    newSearch: 1,
   };
 
   componentDidUpdate(prevProps, prevState) {
-    const { searchQuery, pageNumber, items } = this.state;
+    const { searchQuery, pageNumber, items, newSearch } = this.state;
     if (
       prevState.searchQuery !== searchQuery ||
-      prevState.pageNumber !== pageNumber
+      prevState.pageNumber !== pageNumber ||
+      prevState.newSearch !== newSearch
     ) {
       this.onSearch(searchQuery, pageNumber);
     }
@@ -53,7 +55,12 @@ class App extends Component {
   };
 
   onSubmitSearchBar = text => {
-    this.setState({ searchQuery: text, items: [], pageNumber: 1 });
+    this.setState(prevState => ({
+      searchQuery: text,
+      items: [],
+      pageNumber: 1,
+      newSearch: !prevState.newSearch,
+    }));
   };
 
   onClickMore = () => {

@@ -20,6 +20,7 @@ class SearchBar extends Component {
     const { onSubmit } = this.props;
     const { value } = this.state;
     onSubmit(value);
+    this.setState({ value: '' });
   };
 
   render() {
